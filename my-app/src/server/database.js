@@ -1,4 +1,4 @@
-sconst express = require('express');
+const express = require('express');
 const mongoose = require('mongoose');
 
 const app = express();
@@ -30,3 +30,5 @@ const Task = mongoose.model('Task', taskSchema);
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
+
+export default taskSchema;
