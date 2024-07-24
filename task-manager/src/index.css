@@ -8,17 +8,16 @@ html {
 }
 body {
   background: #eee;
-  padding: 0 16px;
+  
 }
 
 header {
-  background-color: #f5ba13;
-  margin: auto -16px;
+  background-color: #575958;
   padding: 16px 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
-  width: 300px;
-  margin-left: 550px;
+  width: 100%;
+  
 }
 
 header h1 {
@@ -47,8 +46,9 @@ filter_box {
   padding: 16px 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
-  width: 800px;
+  width: 80%;
   margin-left: 250px;
+  margin-right: 250px;
   border-radius: 15px;
 }
 
@@ -64,10 +64,11 @@ big_box {
   padding: 16px 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   text-align: center;
-  width: 850px;
-  height: 800px;
-  margin-left: 200px;
-  margin-right: 1000px;
+  width: 95%;
+  height: 90%;
+  margin-left: 100px;
+  margin-right: 100px;
+  border-radius: 15px;
 }
 
 nav_bar {
@@ -75,8 +76,9 @@ nav_bar {
   position: absolute;
   padding: 16px, 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
-  width: 100px;
-  height: 800px;
+  width: 4%;
+  height: 90%;
+  border-radius: 15px;
 }
 
 nav_bar h1 {
