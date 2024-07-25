@@ -1,18 +1,27 @@
 import React from "react";
 import Nav_Bar_Box from "./NavBarBox";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+
 
 function Nav_Bar() {
   return (
     <div>
       <nav_bar>
-        <h1>nav bar</h1>
+        <ul>
+          <li>Nav bar</li>
+        </ul>
+        {/* <h1>nav bar</h1> */}
       </nav_bar>
-      <Nav_Bar_Box />
+      {/* <Nav_Bar_Box /> */}
     </div>
   );
 }
 
 export default Nav_Bar;
+
+
+
 
 {
   /*

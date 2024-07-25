@@ -36,6 +36,7 @@ function App() {
       <Header />
       <Filter_Box />
       <Big_Box />
+      
       <Nav_Bar />
       <CreateArea onAdd={new_note} />
       {notes.map((noteItem, index) => {

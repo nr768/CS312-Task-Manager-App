@@ -3,7 +3,7 @@ import React from "react";
 function Filter_Box() {
   return (
     <filter_box>
-      <h1>filter_box</h1>
+      <h1>Filter by:</h1>
     </filter_box>
   );
 }

@@ -1,7 +1,11 @@
 import React from "react";
+import Submits from "./AddButtons";
 
 function Big_Box() {
-  return <big_box></big_box>;
+  return <div>
+    <big_box></big_box>;
+    <Submits></Submits>
+  </div>
 }
 
 export default Big_Box;

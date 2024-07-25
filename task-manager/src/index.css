@@ -7,7 +7,7 @@ html {
   font-family: "Montserrat", sans-serif;
 }
 body {
-  background: #eee;
+  background:#ccc;
   
 }
 
@@ -31,11 +31,10 @@ footer {
   text-align: right;
   bottom: 0;
   width: 100%;
-  height: 2.5rem;
 }
 
 footer p {
-  color: #ccc;
+  color: black;
 }
 
 filter_box {
@@ -56,13 +55,16 @@ filter_box h1 {
   color: #080808;
   font-family: "McLaren", cursive;
   font-weight: 200;
+  text-align: left;
 }
 
 big_box {
   margin: auto -16px;
+  margin-top: 20px;
   position: absolute;
   padding: 16px 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  background-color: ;
   text-align: center;
   width: 95%;
   height: 90%;
@@ -76,24 +78,27 @@ nav_bar {
   position: absolute;
   padding: 16px, 32px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+  background-color: #ccc;
+  text-align: center;
   width: 4%;
   height: 90%;
   border-radius: 15px;
+  
+}
+nav_bar ul {
+  list-style-type: none;
+  padding: 2px;
 }
 
-nav_bar h1 {
-  text-align: right;
-  white-space: nowrap;
-  transform: translateY(300px) rotate(270deg);
-}
-
-nav_bar_box {
-  position: absolute;
-  padding: 16px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
+nav_bar li {
+  font-size: large;
   text-align: center;
-  width: 100px;
-  margin-left: 85px;
+  margin: 30px 0;
+}
+
+nav_bar li:hover {
+  cursor: pointer;
+  background-color: #555;
 }
 
 .note {
@@ -162,3 +167,27 @@ form button {
   cursor: pointer;
   outline: none;
 }
+
+.submit_boxes{
+  position: fixed;
+  display: flex;
+  justify-content: space-around;
+  
+  text-align: left;
+  margin-left: 4%;
+  bottom: 5%;
+  width: 95%;
+  height: 5%;
+}
+
+.submit_boxes button{
+  padding: 10px 200px;
+  cursor: pointer;
+  
+}
+
+/* .submit_boxes button{
+  background-color: #ccc;
+  cursor: not-allowed;
+  
+} */
