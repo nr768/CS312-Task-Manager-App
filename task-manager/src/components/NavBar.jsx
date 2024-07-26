@@ -9,7 +9,15 @@ function Nav_Bar() {
     <div>
       <nav_bar>
         <ul>
-          <li>Nav bar</li>
+          <li>/</li>
+          <li>L1</li>
+          <li>L2</li>
+          <li>L3</li>
+          <li>L4</li>
+          <li>L5</li>
+          <li>L6</li>
+          <li>L7</li>
+          <li>Ln</li>
         </ul>
         {/* <h1>nav bar</h1> */}
       </nav_bar>

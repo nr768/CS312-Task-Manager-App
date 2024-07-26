@@ -1,11 +1,14 @@
 import React, { useState } from "react";
-import Header from "./Header";
-import Footer from "./Footer";
-import Note from "./Note";
-import CreateArea from "./CreateArea";
-import Filter_Box from "./FilterBox";
-import Big_Box from "./BigBox";
-import Nav_Bar from "./NavBar";
+import {HashRouter as Router, Routes, Route } from 'react-router-dom'
+// import Header from "./Header";
+// import Footer from "./Footer";
+// import Note from "./Note";
+// import CreateArea from "./CreateArea";
+// import Filter_Box from "./FilterBox";
+// import Big_Box from "./BigBox";
+// import Nav_Bar from "./NavBar";
+import Home_Page from "../Pages/HomePage";
+import List_Page from "../Pages/ListPage";
 
 {
   /* this is the app file to get all of the components together. 
@@ -15,44 +18,17 @@ extra jsx elements
 }
 
 function App() {
-  const [notes, setNotes] = useState([]);
+  return(
+    <Router> 
+      <Routes>
+        <Route path="/" element={<Home_Page/>}/>
+        {/* To get to list one just do: http://localhost:3000/#/List1  */}
+        <Route path="/List1" element={<List_Page/>}/> 
+      </Routes>
+    </Router>
+  )
+  
 
-  function new_note(note) {
-    setNotes((prevNotes) => {
-      return [...prevNotes, note];
-    });
-  }
-
-  function bad_note(id) {
-    setNotes((prevNotes) => {
-      return prevNotes.filter((noteItem, index) => {
-        return index !== id;
-      });
-    });
-  }
-
-  return (
-    <div>
-      <Header />
-      <Filter_Box />
-      <Big_Box />
-      
-      <Nav_Bar />
-      <CreateArea onAdd={new_note} />
-      {notes.map((noteItem, index) => {
-        return (
-          <Note
-            key={index}
-            id={index}
-            title={noteItem.title}
-            content={noteItem.content}
-            onDelete={bad_note}
-          />
-        );
-      })}
-      <Footer />
-    </div>
-  );
 }
 
 export default App;
