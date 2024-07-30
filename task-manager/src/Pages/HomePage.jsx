@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Note from "../components/Note";
-import CreateArea from "../components/CreateArea";
 import Filter_Box from "../components/FilterBox";
 import Big_Box from "../components/BigBox";
 import Nav_Bar from "../components/NavBar";
+import Add_button from "../components/AddButtons";
 
 function HomePage(){
   const [notes, setNotes] = useState([]);
@@ -31,7 +31,7 @@ function HomePage(){
       <Big_Box />
       
       <Nav_Bar />
-      <CreateArea onAdd={new_note} />
+      <Add_button onAdd={new_note} />
       {notes.map((noteItem, index) => {
         return (
           <Note
