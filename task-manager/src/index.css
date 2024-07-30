@@ -59,7 +59,7 @@ filter_box h1 {
 }
 
 big_box {
-  margin: auto -16px;
+  /* margin: auto -16px; */
   margin-top: 20px;
   position: absolute;
   padding: 16px 32px;
@@ -72,30 +72,29 @@ big_box {
   border-radius: 15px;
 }
 
-nav_bar {
-  margin: auto -16px;
+.nav_bar {
   position: absolute;
-  padding: 16px, 32px;
+  /* padding: 16px, 32px; */
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   background-color: #ccc;
   text-align: center;
-  width: 4%;
+  width: 3.5%;
   height: 90%;
   border-radius: 15px;
   
 }
-nav_bar ul {
+.nav_bar ul {
   list-style-type: none;
   padding: 2px;
 }
 
-nav_bar li {
+.nav_bar li {
   font-size: large;
   text-align: center;
   margin: 30px 0;
 }
 
-nav_bar li:hover {
+.nav_bar li:hover {
   cursor: pointer;
   background-color: #555;
 }
@@ -106,7 +105,8 @@ nav_bar li:hover {
   box-shadow: 0 2px 5px #ccc;
   padding: 10px;
   width: 240px;
-  margin: 16px;
+  margin-left: 5%;
+  margin-top: 5%;
   float: left;
 }
 
@@ -185,8 +185,15 @@ form button {
   
 }
 
-/* .submit_boxes button{
-  background-color: #ccc;
-  cursor: not-allowed;
-  
-} */
+ /* .submit_boxes input{
+  padding: 10px 75px;
+  cursor: pointer;
+ } */
+
+.submit_boxes textarea {
+
+  text-align: center;
+  resize: none;
+  line-height: 60px; 
+  padding: 0; 
+}

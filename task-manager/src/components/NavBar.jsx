@@ -1,27 +1,30 @@
 import React from "react";
-import Nav_Bar_Box from "./NavBarBox";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
+import {useNavigate } from 'react-router-dom'
+
+// doumentation: https://reactrouter.com/en/main/hooks/use-navigate
+
+function Nav_Item({ text, path }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(path);
+  };
+
+  return (
+    <li onClick={handleClick} style={{ cursor: "pointer" }}>
+      {text}
+    </li>
+  );
+}
 
 
 function Nav_Bar() {
   return (
-    <div>
-      <nav_bar>
+    <div className="nav_bar">
         <ul>
-          <li>/</li>
-          <li>L1</li>
-          <li>L2</li>
-          <li>L3</li>
-          <li>L4</li>
-          <li>L5</li>
-          <li>L6</li>
-          <li>L7</li>
-          <li>Ln</li>
+          <Nav_Item text = "Home" path="/"/>
+          <Nav_Item text = "List 1" path="/List1"/>
         </ul>
-        {/* <h1>nav bar</h1> */}
-      </nav_bar>
-      {/* <Nav_Bar_Box /> */}
     </div>
   );
 }

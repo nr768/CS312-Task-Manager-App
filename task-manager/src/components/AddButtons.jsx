@@ -1,6 +1,17 @@
 import React, { useState }from "react";
 
 function Add_button(props) {
+  
+  function todays_date(){
+
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth()+1;
+    const year = date.getFullYear();
+
+    return `${month}/${day}/${year}`;
+  }
+  
   const [note, make_note] = useState({
     title: "",
     content: "",
@@ -17,8 +28,22 @@ function Add_button(props) {
     });
   }
 
+
   function submit_note(event) {
-    props.onAdd(note);
+    // this variable will set the content (duedate) in the note box
+    const updatedNote = {
+      // use the note
+      ...note,
+
+      title: note.title.trim() === "" ? "New List" : note.title,
+
+      // if the date box was empty then set to todays date otherwise set to 
+      //  whatever was in the due date input box
+      content: note.content.trim() === "" ? todays_date() : note.content,
+    };
+
+    props.onAdd(updatedNote);
+
     make_note({
       title: "",
       content: "",
@@ -35,10 +60,11 @@ function Add_button(props) {
           placeholder="List Name "
         />
         <textarea
+          
           name="content"
           onChange={doChange}
           value={note.content}
-          placeholder="List Due Date"
+          placeholder= {todays_date()}
           rows="3"
         />
         <button >Overview</button>
