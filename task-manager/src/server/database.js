@@ -20,74 +20,79 @@ db.once('open', () => {
 });
 
 
+//default items
 
-
-// function to return collection in the db
-function getLists() {
-  try{
-    const lists = List.find();
+const defaultItems = [
+  {
+    name: "Emails",
+    dueDate: new Date(), // Set the current date
+    priority: "High",
+    User: "Max"
+  },
+  {
+    name: "Morning Meeting",
+    dueDate: new Date(), // Set the current date
+    priority: "Medium",
+    User: "Gabriela"
+  }
+];
+//get all lists
+async function getLists() {
+  try {
+    const lists = await List.find({});
     return lists;
-
-  } catch(e){
-    console.error(e);
+  } catch (error) {
+    console.error('Error fetching lists:', error);
+    throw error;
   }
-
 }
 
-
-// function for finding and expanding an exact list
-function getListByID(id){
-  try{
-    const list = List.findById(id);
+// Get a list by ID
+async function getListById(id) {
+  try {
+    const list = await List.findById(id);
     return list;
-
-  } catch(e){
-    console.error(e);
+  } catch (error) {
+    console.error('Error fetching list by ID:', error);
+    throw error;
   }
 }
 
-function getListByName(name){
-  try{
-    const list = List.find({name: name});
-    const id = list._id;
-    return id;
-
-  } catch(e){
-    console.error(e);
+// Get a list by name
+async function getListByName(name) {
+  try {
+    const list = await List.findOne({ name: name });
+    return list;
+  } catch (error) {
+    console.error('Error fetching list by name:', error);
+    throw error;
   }
 }
+
 
 // create new list
-function createList(customListName){
-  // grab the custom list name
-  const customListName = _.capitalize(customListName);
+async function createList(name) {
+  try {
+    // Check if the list already exists
+    const existingList = await List.findOne({ name: name });
+    if (existingList) {
+      return existingList._id; // Return the ID of the existing list
+    }
 
-  // check is list already exists
-  List.findOne({name: customListName}).then((foundList) =>{
-      if(!foundList){
-          // create the new list
-          const list = new List({
-              name: customListName,
-              items: []
-          });
-      
-          // save the new list
-          list.save();
+    // Create a new list if it doesn't exist
+    const newList = new List({
+      name: name,
+      items: [defaultItems] 
+    });
 
-          // return back ID to list
-          return list._id;
-      }
-      // otherwise assume already exists
-      else{
-        // return ID of existing list
-        return getListByName(customListName);
-      }
+    await newList.save();
+    return newList._id; // Return the ID of the new list
+  } catch (error) {
+    console.error("Error creating list:", error);
+    return null;
+  }
+}
 
-  }).catch((err) =>{
-      console.log(err);
-  })
-
-};
 
 
 
@@ -98,15 +103,16 @@ function addToList(listID, name, dueDate, priority, user){
    list.save();
 }
 
-// function to close the connection to the db
-function closeConnection(){
-  mongoose.close();
-}
-
 
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
 
-export {getLists, getListByID, createList, addToList};
+module.exports = {
+  getLists,
+  getListById,
+  getListByName,
+  createList,
+  addToList
+};
