@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import Popup from 'reactjs-popup';
 
 function AddButton(props) {
   
@@ -57,7 +58,7 @@ function AddButton(props) {
       console.error('There was an error creating the list!', error);
     });
   }
-
+// the last big div is the overview button. it makes a popup appear with all of the overview stuff we need 
   return (
     <div className="submit_boxes">
       <button type="submit" onClick={handleSubmit}>Add New List</button>
@@ -71,10 +72,31 @@ function AddButton(props) {
         name="content"
         onChange={handleChange}
         value={note.content}
-        placeholder={todays_date()}
-        rows="3"
+        placeholder="List Due Date:"
       />
-      <button>Overview</button>
+      <div>
+      <Popup trigger=
+        {<button> Overview </button>} 
+          modal nested>
+            {
+              close => (
+                <div className='modal'>
+                  <div className='overview_content'>
+                    Num tasks assigned: <br></br>
+                    Num tasks completed: <br></br>
+                    Num tasks overdue: <br></br>
+                     </div>
+                     <div>
+                        <button onClick=
+                          {() => close()}>
+                            Close overview
+                        </button>
+                      </div>
+                      </div>
+                    )
+                }
+            </Popup>
+      </div>
     </div>
   );
 }
