@@ -6,6 +6,7 @@ import Filter_Box from "../components/FilterBox";
 import Big_Box from "../components/BigBox";
 import Nav_Bar from "../components/NavBar";
 import Add_button from "../components/AddButtons";
+import ListDisplay from "../components/ListDisplay";
 
 function HomePage(){
   const [notes, setNotes] = useState([]);
@@ -29,7 +30,7 @@ function HomePage(){
       <Header title ={"Dashboard (homepage)"}/>
       <Filter_Box />
       <Big_Box />
-      
+      <ListDisplay></ListDisplay>
       <Nav_Bar />
       <Add_button onAdd={new_note} />
       {notes.map((noteItem, index) => {
