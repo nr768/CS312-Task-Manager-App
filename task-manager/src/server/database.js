@@ -62,19 +62,51 @@ const defaultItems = [
 
 
 // Add an item to a list
-async function addToList(listID, name, dueDate, priority, user) {
+async function addToList(listId, newItem) {
   try {
-    const list = await getListById(listID);
+    const list = await List.findById(listId);
     if (!list) {
       throw new Error('List not found');
     }
-    list.items.push({ name, dueDate, priority, User: user });
+    list.items.push(newItem);
     await list.save();
+    return list;
   } catch (error) {
     console.error('Error adding item to list:', error);
     throw error;
   }
 }
+
+// Delete a list
+async function deleteList(listId) {
+  try {
+    const result = await List.findByIdAndDelete(listId);
+    if (!result) {
+      throw new Error('List not found');
+    }
+    return result;
+  } catch (error) {
+    console.error('Error deleting list:', error);
+    throw error;
+  }
+}
+
+// Delete an item from a list
+async function deleteItem(listId, itemId) {
+  try {
+    const list = await List.findById(listId);
+    if (!list) {
+      throw new Error('List not found');
+    }
+    list.items = list.items.filter(item => item._id.toString() !== itemId);
+    await list.save();
+    return list;
+  } catch (error) {
+    console.error('Error deleting item from list:', error);
+    throw error;
+  }
+}
+
 
 
 // Get all lists old function
@@ -148,12 +180,14 @@ app.post('/createList', async (req, res) => {
 
 // Add an item to a list route
 app.post('/add-item', async (req, res) => {
-  const { listID, name, dueDate, priority, user } = req.body;
+  const { listId, name, dueDate, priority, user } = req.body;
   try {
-    await addToList(listID, name, dueDate, priority, user);
-    res.status(200).send({ message: 'Item added' });
+    const newItem = { name, dueDate, priority, User: user };
+    const updatedList = await addToList(listId, newItem);
+    res.status(200).json({ message: 'Item added successfully', updatedList });
   } catch (error) {
-    res.status(500).send({ message: 'Error adding item', error });
+    console.error('Error in add-item route:', error);
+    res.status(500).json({ message: 'Error adding item', error: error.message });
   }
 });
 
@@ -189,6 +223,30 @@ app.post('/getListById', async (req, res) => {
       res.status(500).json({ message: 'Server error' });
   }
 });
+// Delete list route
+app.post('/deleteList', async (req, res) => {
+  const { listId } = req.body;
+  try {
+    await deleteList(listId);
+    res.status(200).json({ message: 'List deleted successfully' });
+  } catch (error) {
+    console.error('Error in deleteList route:', error);
+    res.status(500).json({ message: 'Error deleting list', error: error.message });
+  }
+});
+
+// Delete item route
+app.post('/deleteItem', async (req, res) => {
+  const { listId, itemId } = req.body;
+  try {
+    const updatedList = await deleteItem(listId, itemId);
+    res.status(200).json({ message: 'Item deleted successfully', updatedList });
+  } catch (error) {
+    console.error('Error in deleteItem route:', error);
+    res.status(500).json({ message: 'Error deleting item', error: error.message });
+  }
+});
+
 
 // Start the server
 app.listen(PORT, () => {
