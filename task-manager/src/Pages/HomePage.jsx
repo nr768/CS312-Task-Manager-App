@@ -7,6 +7,7 @@ import Big_Box from "../components/BigBox";
 import Nav_Bar from "../components/NavBar";
 import Add_button from "../components/AddButtons";
 import ListDisplay from "../components/ListDisplay";
+// import axios from "axios";
 
 function HomePage(){
   const [notes, setNotes] = useState([]);
@@ -17,14 +18,6 @@ function HomePage(){
     });
   }
 
-  function bad_note(id) {
-    setNotes((prevNotes) => {
-      return prevNotes.filter((noteItem, index) => {
-        return index !== id;
-      });
-    });
-  }
-
   return (
     <div>
       <Header title ={"Dashboard (homepage)"}/>
@@ -32,15 +25,16 @@ function HomePage(){
       <Big_Box />
       <ListDisplay></ListDisplay>
       <Nav_Bar />
-      <Add_button onAdd={new_note} />
+      <Add_button onAdd={new_note}/>
       {notes.map((noteItem, index) => {
         return (
           <Note
             key={index}
             id={index}
             title={noteItem.title}
+            isList={true} // This note is representing a list
             content={noteItem.content}
-            onDelete={bad_note}
+            
           />
         );
       })}

@@ -16,7 +16,7 @@ function ListDisplay() {
   return (
     <div >
       {lists.map(list => (
-        <Note title={list.name} content={list.dueDate}/>
+        <Note title={list.name} content={list.dueDate} isList={true}/>
       ))}
     </div>
   );

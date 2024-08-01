@@ -6,7 +6,7 @@ import Note from "../components/Note";
 import Filter_Box from "../components/FilterBox";
 import Big_Box from "../components/BigBox";
 import Nav_Bar from "../components/NavBar";
-import Add_button from "../components/AddButtons";
+import Add_List_Button from "../components/AddListButtons";
 
 function List_Page(props) {
     const [notes, setNotes] = useState([]);
@@ -27,24 +27,21 @@ function List_Page(props) {
         setNotes((prevNotes) => [...prevNotes, note]);
     }
 
-    function bad_note(id) {
-        setNotes((prevNotes) => prevNotes.filter((_, index) => index !== id));
-    }
-
     return (
         <div>
             <Header title={`${name}`} />
             <Filter_Box />
             <Big_Box />
             <Nav_Bar />
-            <Add_button onAdd={new_note} />
+            <Add_List_Button onAdd={new_note} listId={id}/>
             {notes.map((noteItem, index) => (
                 <Note
                     key={index}
                     id={index}
+                    listId={id}
                     title={noteItem.name}
+                    isList={false} 
                     content={`Due: ${new Date(noteItem.dueDate).toLocaleDateString()} \nPriority: ${noteItem.priority} \nUser: ${noteItem.User}`}
-                    onDelete={bad_note}
                 />
             ))}
             <Footer />
