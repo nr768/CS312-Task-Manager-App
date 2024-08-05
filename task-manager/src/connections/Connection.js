@@ -9,20 +9,12 @@ import Big_Box from "../components/BigBox";
 import Nav_Bar from "../components/NavBar";
 import Home_Page from "../Pages/HomePage";
 import List_Page from "../Pages/ListPage";
-import {getLists, getListByID} from "../server/database.js";
+import {getLists, getListById, getListByName, createList, addToList} from "../server/database.js";
 const express = require('express');
-
-
 
 // function to call to server to create a new list
 function newList(props){
-    <taskSchema
-        name ={props.name}
-        dueDate = {props.dueDate}
-        priority = {props.priority}
-        User = {props.user}
-    />
-
+    createList(props.name);
 }
 
 // function to create an item in a list 

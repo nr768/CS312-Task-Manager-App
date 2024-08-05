@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Define Task Schema and Model
-const taskSchema = new mongoose.Schema({
+const itemSchema = new mongoose.Schema({
     name: String,
     dueDate: Date,
     priority: String,
@@ -9,6 +9,6 @@ const taskSchema = new mongoose.Schema({
   });
   
 // for creating a new list
-const Task = mongoose.model('Task', taskSchema);
+const Item = mongoose.model('Item', itemSchema);
 
-module.exports = Task;
+module.exports = Item;

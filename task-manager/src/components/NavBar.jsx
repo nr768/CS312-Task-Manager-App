@@ -1,27 +1,44 @@
-import React from "react";
-import Nav_Bar_Box from "./NavBarBox";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
+import React, { useState, useEffect } from "react";
+import {useNavigate } from 'react-router-dom'
+import axios from 'axios';
+// import ListPage from "../Pages/ListPage";
 
+// doumentation: https://reactrouter.com/en/main/hooks/use-navigate
+
+function Nav_Item({ text, path }) {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(path);
+  };
+
+  return (
+    <li onClick={handleClick} style={{ cursor: "pointer" }}>
+      {text}
+    </li>
+  );
+}
 
 function Nav_Bar() {
+  const [lists, setLists] = useState([]);
+
+  useEffect(() => {
+    axios.post('http://localhost:3001/getLists')
+      .then(response => {
+        setLists(response.data);
+        
+      })
+  }, []);
+
   return (
-    <div>
-      <nav_bar>
+    <div className="nav_bar">
         <ul>
-          <li>/</li>
-          <li>L1</li>
-          <li>L2</li>
-          <li>L3</li>
-          <li>L4</li>
-          <li>L5</li>
-          <li>L6</li>
-          <li>L7</li>
-          <li>Ln</li>
+          <Nav_Item text = "Home" path="/"/>
+          {lists.map(list => (
+            <Nav_Item text={list.name} path={`/list/${list._id}`} />
+          ))}
+    
         </ul>
-        {/* <h1>nav bar</h1> */}
-      </nav_bar>
-      {/* <Nav_Bar_Box /> */}
     </div>
   );
 }
